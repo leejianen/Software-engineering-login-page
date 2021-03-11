@@ -1,6 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../Widgets/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:software_engineering_login/Widgets/background-image.dart';
+import 'package:software_engineering_login/Widgets/password-input.dart';
+import 'package:software_engineering_login/Widgets/rounded-button.dart';
+import 'package:software_engineering_login/Widgets/text-input.dart';
+
+
 import '../palette.dart';
 
 class LoginPage extends StatelessWidget {
@@ -47,10 +54,18 @@ class LoginPage extends StatelessWidget {
                                 hint: 'Password',
                                 inputAction: TextInputAction.done,
                               ),
-                              Text('Forgot Password?',
-                                style: kBodyText,
-                              ),
-                        ],
+                              TextButton(onPressed: () {},
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: TextButton(onPressed: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                      child: Text('Forgot Password?',
+                                          style: kBodyText),
+                                    ),
+                                  ),
+                                ))
+                                ],
                         ),
                         Column(
                           children: [
@@ -64,13 +79,14 @@ class LoginPage extends StatelessWidget {
                               height: 80,
                             ),
                             Container(
-                              decoration: BoxDecoration(border:
-                              Border(bottom: BorderSide(color: Colors.white, width: 1),
-                              )),
-                                child: Text(
-                                  'CreateNewAccount',
-                                  style: kBodyText,
-                                ),
+                                child: TextButton(onPressed: () {
+                                  Navigator.pushNamed(context, '/home');
+                                },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                      child: Text("Register New Account",
+                                          style: kBodyText),
+                                    ))
                             ),
                             SizedBox(
                               height: 30,
