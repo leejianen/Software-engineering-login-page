@@ -8,7 +8,18 @@ import 'package:software_engineering_login/Widgets/text-input.dart';
 
 import '../palette.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  String genderChoose;
+
+  List genderList = [
+    "M","F"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -35,22 +46,56 @@ class RegisterPage extends StatelessWidget {
                             'Registration',
                             style: kHeading,
                           ),
-                        ), 
+                        ),
                       ],
                     ),
                   ),
                   SizedBox(
-                    height: 100,
+                    height: 20,
                   ),
                   Container(
                       child: Padding(
                         padding: const EdgeInsets.symmetric
                           (horizontal: 20.0),
                         child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text('Please fill in this form:',
+                                style: kBodyText),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(26.0),
+                                  child: Container(
+                                    padding: EdgeInsets.only(left: 16, right: 16),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white, width: 1),
+                                      borderRadius: BorderRadius.circular(15)
+                                    ),
+                                    child: DropdownButton(
+                                      hint: Text("Select Gender"),
+                                      dropdownColor: Colors.black,
+                                      icon: Icon(Icons.arrow_drop_down),
+                                      iconSize:44,
+                                      iconEnabledColor: Colors.white,
+                                      isExpanded: true,
+                                      style: dropdown,
+                                      value: genderChoose,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          genderChoose = newValue;
+                                        });
+                                      },
+                                      items: genderList.map((valueItem) {
+                                        return DropdownMenuItem(
+                                          value: valueItem,
+                                          child: Text(valueItem),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                ),
                                 TextInput(
                                   icon: FontAwesomeIcons.solidEnvelope,
                                   hint: 'Email',

@@ -12,3 +12,8 @@ const TextStyle kBodyText = TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.white,
 );
+
+const TextStyle dropdown = TextStyle(
+    color: Colors.white,
+    fontSize:22
+);
