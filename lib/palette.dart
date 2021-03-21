@@ -13,7 +13,20 @@ const TextStyle kBodyText = TextStyle(
     color: Colors.white,
 );
 
-const TextStyle dropdown = TextStyle(
+const TextStyle kBody = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
     color: Colors.white,
-    fontSize:22
+);
+
+const TextStyle navScreen = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+);
+
+const TextStyle navScreenWhite = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
 );

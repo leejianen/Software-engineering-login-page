@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../palette.dart';
 
-class TextInput extends StatelessWidget {
-
-  const TextInput({
+class UsernameInput extends StatelessWidget {
+  const UsernameInput({
     Key key,
     @required this.icon,
     @required this.hint,
@@ -18,26 +18,21 @@ class TextInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0),
-      child: Container(
-        decoration: BoxDecoration(color: Colors.
-        grey[600].withOpacity(0.5),
-          borderRadius: BorderRadius.circular(16),),
+    return Container(
+      width: 220,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.white, width: 1),
+        color: Colors.grey[600].withOpacity(0.5),
+        borderRadius: BorderRadius.circular(16),),
+      child: SizedBox(
         child: TextField(
           decoration: InputDecoration(
             contentPadding:
             const EdgeInsets.symmetric
-              (vertical: 20),
+              (vertical: 10),
             border: InputBorder.none,
-            hintText: hint,
             prefixIcon: Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size:30,
-              ),
             ),
             hintStyle: kBodyText,
           ),

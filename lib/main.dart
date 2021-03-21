@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:software_engineering_login/screens/RegisterPage.dart';
 import 'package:software_engineering_login/screens/login%20page.dart';
+import 'package:software_engineering_login/screens/NavScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       ),
         routes: {
           '/': (context) => LoginPage(),
-          '/home': (context) => RegisterPage(),
+          '/register': (context) => RegisterPage(),
+          '/home': (context) => NavigationPage(),
         }
     );
   }

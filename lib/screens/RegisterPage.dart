@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:software_engineering_login/Widgets/background-image.dart';
-import 'package:software_engineering_login/Widgets/password-input.dart';
+import 'package:software_engineering_login/Widgets/date-of-birth.dart';
 import 'package:software_engineering_login/Widgets/rounded-button.dart';
-import 'package:software_engineering_login/Widgets/text-input.dart';
-
+import 'package:software_engineering_login/Widgets/weight-input.dart';
 import '../palette.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -14,11 +13,38 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final cfmPasswordController = TextEditingController();
+  final passwordController = TextEditingController();
+  final weightController = TextEditingController();
+
   String genderChoose;
 
   List genderList = [
     "M","F"
   ];
+
+  DateTime _date = DateTime.now();
+
+  Future<Null> _selectDate (BuildContext context) async{
+    DateTime _datePicker = await showDatePicker(
+      context: context,
+      initialDate: _date,
+      firstDate: DateTime(1947),
+      lastDate: DateTime(2030),
+    );
+
+    if(_datePicker != null && _datePicker != _date){
+      setState(() {
+        _date = _datePicker;
+        print(
+          _date.toString(),
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,59 +91,244 @@ class _RegisterPageState extends State<RegisterPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(26.0),
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 16, right: 16),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.white, width: 1),
-                                      borderRadius: BorderRadius.circular(15)
+                                Row(
+                                  children: [
+                                    Text('Gender:',
+                                        style: kBodyText),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                                      child: Container(
+                                        padding: EdgeInsets.only(left: 16, right: 16),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.white, width: 1),
+                                            color: Colors.grey[600].withOpacity(0.5),
+                                            borderRadius: BorderRadius.circular(15)
+                                        ),
+                                        child: DropdownButton(
+                                          hint: Text("Select Gender",
+                                          style: kBodyText),
+                                          dropdownColor: Colors.black,
+                                          icon: Icon(Icons.arrow_drop_down),
+                                          iconSize:44,
+                                          iconEnabledColor: Colors.white,
+                                          style: kBodyText,
+                                          value: genderChoose,
+                                          onChanged: (newValue) {
+                                            print(newValue);
+                                            setState(() {
+                                              genderChoose = newValue;
+                                            });
+                                          },
+                                          items: genderList.map((valueItem) {
+                                            return DropdownMenuItem(
+                                              value: valueItem,
+                                              child: Text(valueItem),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ),
                                     ),
-                                    child: DropdownButton(
-                                      hint: Text("Select Gender"),
-                                      dropdownColor: Colors.black,
-                                      icon: Icon(Icons.arrow_drop_down),
-                                      iconSize:44,
-                                      iconEnabledColor: Colors.white,
-                                      isExpanded: true,
-                                      style: dropdown,
-                                      value: genderChoose,
-                                      onChanged: (newValue) {
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text('Weight:    ',
+                                        style: kBodyText),
+                                    Container(
+                                        width: 220,
+                                        decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.white, width: 1),
+                                        color: Colors.grey[600].withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(16),),
+                                          child: SizedBox(
+                                            child: TextField(
+                                              controller: weightController,
+                                              decoration: InputDecoration(
+                                              contentPadding:
+                                              const EdgeInsets.symmetric
+                                              (vertical: 10),
+                                              border: InputBorder.none,
+                                              prefixIcon: Padding(
+                                              padding: const EdgeInsets.symmetric(horizontal:20.0),
+                                                ),
+                                              hintStyle: kBodyText,
+                                                ),
+                                              style: kBodyText,
+                                              keyboardType: TextInputType.number,
+                                              textInputAction: TextInputAction.next,
+                                            ),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                                      child: Row(
+                                        children: [
+                                          Text('Date Of Birth:      ',
+                                              style: kBodyText),
+                                        ],
+                                      ),
+                                    ),
+                                    RaisedButton(
+                                      onPressed: (){
                                         setState(() {
-                                          genderChoose = newValue;
+                                          _selectDate(context);
                                         });
                                       },
-                                      items: genderList.map((valueItem) {
-                                        return DropdownMenuItem(
-                                          value: valueItem,
-                                          child: Text(valueItem),
-                                        );
-                                      }).toList(),
+                                      color: Color(0xFFC41A3B),
+                                      child: Text("Date Picker", style: TextStyle(color: Colors.white),),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Text('Enter Your Username:',
+                                          style: kBodyText),
+                                    ],
+                                  ),
+                                ),
+
+                              //username input
+                                Container(
+                                width: 370,
+                                decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white, width: 1),
+                                color: Colors.grey[600].withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(16),),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                                     child: SizedBox(
+                                      child: TextField(
+                                        controller: usernameController,
+                                        decoration: InputDecoration(
+                                        contentPadding:
+                                        const EdgeInsets.symmetric
+                                        (vertical: 10),
+                                        border: InputBorder.none,
+                                        hintStyle: kBodyText,
+                                        ),
+                                        style: kBodyText,
+                                        keyboardType: TextInputType.text,
+                                        textInputAction: TextInputAction.done,
+                                        ),
+                                      ),
+                                  ),
+                                  ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Text('Enter Your E-mail:',
+                                          style: kBodyText),
+                                    ],
+                                  ),
+                                ),
+
+                                //username input
+                                Container(
+                                  width: 370,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white, width: 1),
+                                    color: Colors.grey[600].withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(16),),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                                    child: SizedBox(
+                                      child: TextField(
+                                        controller:emailController,
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                          const EdgeInsets.symmetric
+                                            (vertical: 10),
+                                          border: InputBorder.none,
+                                          hintStyle: kBodyText,
+                                        ),
+                                        style: kBodyText,
+                                        keyboardType: TextInputType.emailAddress,
+                                        textInputAction: TextInputAction.done,
+                                      ),
                                     ),
                                   ),
                                 ),
-                                TextInput(
-                                  icon: FontAwesomeIcons.solidEnvelope,
-                                  hint: 'Email',
-                                  inputType: TextInputType.emailAddress,
-                                  inputAction: TextInputAction.next,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Text('Enter Your Password:',
+                                          style: kBodyText),
+                                    ],
+                                  ),
                                 ),
-                                PasswordInput(
-                                  icon: FontAwesomeIcons.lock,
-                                  hint: 'Password',
-                                  inputAction: TextInputAction.done,
-                                ),
-                                TextButton(onPressed: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                      child: TextButton(onPressed: () {},
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                          child: Text('Forgot Password?',
-                                              style: kBodyText),
+
+                                //username input
+                                Container(
+                                  width: 370,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white, width: 1),
+                                    color: Colors.grey[600].withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(16),),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                                    child: SizedBox(
+                                      child: TextField(
+                                        controller: passwordController,
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                          const EdgeInsets.symmetric
+                                            (vertical: 10),
+                                          border: InputBorder.none,
+                                          hintStyle: kBodyText,
                                         ),
+                                        obscureText: true,
+                                        style: kBodyText,
+                                        keyboardType: TextInputType.text,
+                                        textInputAction: TextInputAction.done,
                                       ),
-                                    ))
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Text('Re-Enter Your Password',
+                                          style: kBodyText),
+                                    ],
+                                  ),
+                                ),
+
+                                //username input
+                                Container(
+                                  width: 370,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white, width: 1),
+                                    color: Colors.grey[600].withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(16),),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                                    child: SizedBox(
+                                      child: TextField(
+                                        controller: cfmPasswordController,
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                          const EdgeInsets.symmetric
+                                            (vertical: 10),
+                                          border: InputBorder.none,
+                                          hintStyle: kBodyText,
+                                        ),
+                                        obscureText: true,
+                                        style: kBodyText,
+                                        keyboardType: TextInputType.text,
+                                        textInputAction: TextInputAction.done,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                             Column(
@@ -126,20 +337,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                     height: 50,
                                   ),
                                   RoundedButton(
-                                    buttonText: 'Login',
+                                    buttonText: 'Register',
                                   ),
                                   SizedBox(
                                     height: 80,
-                                  ),
-                                  Container(
-                                      child: TextButton(onPressed: () {
-                                        Navigator.pushNamed(context, '/home');
-                                      },
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                            child: Text("Register New Account",
-                                                style: kBodyText),
-                                          ))
                                   ),
                                   SizedBox(
                                     height: 30,

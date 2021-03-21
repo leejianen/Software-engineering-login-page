@@ -11,6 +11,10 @@ import 'package:software_engineering_login/Widgets/text-input.dart';
 import '../palette.dart';
 
 class LoginPage extends StatelessWidget {
+
+  final loginController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -43,17 +47,75 @@ class LoginPage extends StatelessWidget {
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              TextInput(
-                                icon: FontAwesomeIcons.solidEnvelope,
-                                hint: 'Email',
-                                inputType: TextInputType.emailAddress,
-                                inputAction: TextInputAction.next,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                child: Container(
+                                  decoration: BoxDecoration(color: Colors.
+                                  grey[600].withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(16),),
+                                  child: TextField(
+                                    controller: loginController,
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                      const EdgeInsets.symmetric
+                                        (vertical: 20),
+                                      border: InputBorder.none,
+                                      hintText: 'Email',
+                                      prefixIcon: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal:20.0),
+                                        child: Icon(
+                                          FontAwesomeIcons.solidEnvelope,
+                                          color: Colors.white,
+                                          size:30,
+                                        ),
+                                      ),
+                                      hintStyle: kBodyText,
+                                    ),
+                                    style: kBodyText,
+                                    keyboardType: TextInputType.emailAddress,
+                                    textInputAction: TextInputAction.next,
+                                  ),
+                                ),
                               ),
-                              PasswordInput(
-                                icon: FontAwesomeIcons.lock,
-                                hint: 'Password',
-                                inputAction: TextInputAction.done,
-                              ),
+                              // TextInput(
+                              //     icon: FontAwesomeIcons.solidEnvelope,
+                              //     hint:'Email',
+                              //     inputAction: TextInputAction.next,
+                              //     inputType: TextInputType.emailAddress,
+                              // ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(color: Colors.
+                                    grey[600].withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(16),),
+                                    child: TextField(
+                                      controller: passwordController,
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                        const EdgeInsets.symmetric
+                                          (vertical: 20),
+                                        border: InputBorder.none,
+                                        hintText: 'Password',
+                                        prefixIcon: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal:20.0),
+                                          child: Icon(
+                                            FontAwesomeIcons.lock,
+                                            color: Colors.white,
+                                            size:30,
+                                          ),
+                                        ),
+                                        hintStyle: kBodyText,
+                                      ),
+                                      obscureText: true,
+                                      style: kBodyText,
+                                      textInputAction: TextInputAction.done,
+                                    ),
+                                  ),
+                                ),
+                              // PasswordInput(icon: FontAwesomeIcons.lock,
+                              //     hint: 'Password',
+                              //     inputAction: TextInputAction.done),
                               TextButton(onPressed: () {},
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -72,15 +134,28 @@ class LoginPage extends StatelessWidget {
                             SizedBox(
                               height: 50,
                             ),
-                            RoundedButton(
-                              buttonText: 'Login',
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color:Colors.blue,
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: TextButton(onPressed: () {
+                                return Navigator.pushNamed(context, '/home');
+                              },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                  child: Text('Login',
+                                      style: kBodyText),
+                                ),
+                              ),
                             ),
+                            // RoundedButton(buttonText: 'Login'),
                             SizedBox(
                               height: 80,
                             ),
                             Container(
                                 child: TextButton(onPressed: () {
-                                  Navigator.pushNamed(context, '/home');
+                                  Navigator.pushNamed(context, '/register');
                                 },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 8.0),
