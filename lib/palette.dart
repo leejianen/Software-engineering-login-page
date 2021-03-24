@@ -19,6 +19,12 @@ const TextStyle kBody = TextStyle(
     color: Colors.white,
 );
 
+const TextStyle errorText = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
+    color: Colors.red,
+);
+
 const TextStyle navScreen = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.bold,
