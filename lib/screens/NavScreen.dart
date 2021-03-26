@@ -68,39 +68,39 @@ class _NavigationScreenState extends State<NavigationPage> {
                                 style: navScreen),
                           ],
                         ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(
-                              height: 35.0,
-                              child: IconButton(
-                                  icon: Icon(NavigationScreen.changedistance,),
-                                  onPressed: (){}),
-                            ),
-                            Text('Change',
-                                style: navScreen),
-                            Text('Distance',
-                                style: navScreen),
-                          ],
-                        ),
+                        // Column(
+                        //   mainAxisSize: MainAxisSize.min,
+                        //   children: [
+                        //     SizedBox(
+                        //       height: 35.0,
+                        //       child: IconButton(
+                        //           icon: Icon(NavigationScreen.changedistance,),
+                        //           onPressed: (){}),
+                        //     ),
+                        //     Text('Change',
+                        //         style: navScreen),
+                        //     Text('Distance',
+                        //         style: navScreen),
+                        //   ],
+                        // ),
                         Container(width: size.width*0.20),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(
-                              height: 35.0,
-                              child: IconButton(
-                                  icon: Icon(NavigationScreen.changemoderun,
-                                  size: 40.0),
-                                  onPressed: (){}),
-                            ),
-                            Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
-                            Text('Change',
-                                style: navScreen),
-                            Text('Mode',
-                                style: navScreen),
-                          ],
-                        ),
+                        // Column(
+                        //   mainAxisSize: MainAxisSize.min,
+                        //   children: [
+                        //     SizedBox(
+                        //       height: 35.0,
+                        //       child: IconButton(
+                        //           icon: Icon(NavigationScreen.changemoderun,
+                        //           size: 40.0),
+                        //           onPressed: (){}),
+                        //     ),
+                        //     Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                        //     Text('Change',
+                        //         style: navScreen),
+                        //     Text('Mode',
+                        //         style: navScreen),
+                        //   ],
+                        // ),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
