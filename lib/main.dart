@@ -7,6 +7,8 @@ import 'package:software_engineering_login/screens/RegisterPage.dart';
 import 'package:software_engineering_login/screens/login%20page.dart';
 import 'package:software_engineering_login/screens/NavScreen.dart';
 import 'package:software_engineering_login/screens/AccountUpdate.dart';
+import 'package:software_engineering_login/screens/EmailUpdate.dart';
+import 'package:software_engineering_login/screens/PasswordUpdate.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
           '/register': (context) => RegisterPage(),
           '/home': (context) => NavigationPage(),
           '/update': (context) => AccountUpdatePage(),
+          '/EmailUpdate': (context) => EmailUpdatePage(),
+          '/PwUpdate': (context) => PasswordUpdatePage(),
         }
     );
   }

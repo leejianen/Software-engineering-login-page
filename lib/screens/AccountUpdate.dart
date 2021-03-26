@@ -14,9 +14,6 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
   var _formKey = GlobalKey<FormState>();
 
   final usernameController = TextEditingController();
-  final emailController = TextEditingController();
-  final cfmPasswordController = TextEditingController();
-  final passwordController = TextEditingController();
   final weightController = TextEditingController();
 
   String genderChoose;
@@ -200,7 +197,9 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                         child: SizedBox(
                                           child: TextFormField(
                                             validator: (String value){
-                                              if(checkWeight(value))
+                                              if(value.isEmpty)
+                                                return null;
+                                              else if(checkWeight(value))
                                                 return "   Enter a number \n   between 20 and 200";
                                               else
                                                 return null;
@@ -268,7 +267,9 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                       child: SizedBox(
                                         child: TextFormField(
                                           validator: (String value){
-                                            if(value.length < 3)
+                                            if(value.isEmpty)
+                                              return null;
+                                            else if(value.length < 3)
                                               return "   Enter more than 3 Characters";
                                             else
                                               return null;
@@ -303,26 +304,19 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                       child: TextButton(onPressed: () {
                                         setState((){
                                           if (_formKey.currentState.validate()) {
-                                            print(" This works");
+                                            Navigator.pushNamed(context, '/EmailUpdate');
                                           }
                                           // return Navigator.pushNamed(context, '/home');
                                         });
-                                        return showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              content: Text("hi"),
-                                            );
-                                          },
-                                        );
                                       },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                          child: Text('Change Password',
+                                          child: Text('Change E-mail',
                                               style: kBodyText),
                                         ),
                                       ),
-                                    ),                                    SizedBox(
+                                    ),
+                                    SizedBox(
                                       height: 50,
                                     ),
                                     Container(
@@ -333,22 +327,13 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                       child: TextButton(onPressed: () {
                                         setState((){
                                           if (_formKey.currentState.validate()) {
-                                            print(" This works");
+                                            Navigator.pushNamed(context, '/PwUpdate');
                                           }
-                                          // return Navigator.pushNamed(context, '/home');
                                         });
-                                        return showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              content: Text("hi"),
-                                            );
-                                          },
-                                        );
                                       },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                          child: Text('Change E-mail',
+                                          child: Text('Change Password',
                                               style: kBodyText),
                                         ),
                                       ),
