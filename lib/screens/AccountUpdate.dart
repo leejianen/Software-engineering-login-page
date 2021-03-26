@@ -11,10 +11,61 @@ class AccountUpdatePage extends StatefulWidget {
 
 class _AccountUpdatePageState extends State<AccountUpdatePage> {
 
+  Future<void> passwordVerificationDialog(BuildContext context) async {
+    return await showDialog(context: context,
+    builder: (context){
+      return AlertDialog(
+      content: Form(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+          children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+            child: Row(
+              children: [
+                Text('Enter Your Password:',
+                    style: kBodyTextBlack),
+              ],
+            ),
+          ),
+          //Password input
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              child: SizedBox(
+                child: TextFormField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    contentPadding:
+                    const EdgeInsets.symmetric
+                      (vertical: 10),
+                    errorStyle: errorText,
+                    hintStyle: kBodyTextBlack,
+                  ),
+                  obscureText: true,
+                  style: kBodyTextBlack,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                ),
+              ),
+            ),
+        ],
+      )),
+        actions: <Widget>[
+          TextButton(
+          child: Text('Submit'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          }
+          )],
+      );
+    });
+  }
+
   var _formKey = GlobalKey<FormState>();
 
   final usernameController = TextEditingController();
   final weightController = TextEditingController();
+  final passwordController = TextEditingController();
 
   String genderChoose;
 
@@ -301,7 +352,8 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                       decoration: BoxDecoration(
                                           color:Colors.red,
                                           borderRadius: BorderRadius.circular(16)),
-                                      child: TextButton(onPressed: () {
+                                      child: TextButton(onPressed: () async {
+                                        await passwordVerificationDialog(context);
                                         setState((){
                                           if (_formKey.currentState.validate()) {
                                             Navigator.pushNamed(context, '/EmailUpdate');
@@ -324,7 +376,8 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                       decoration: BoxDecoration(
                                           color:Colors.red,
                                           borderRadius: BorderRadius.circular(16)),
-                                      child: TextButton(onPressed: () {
+                                      child: TextButton(onPressed: () async {
+                                        await passwordVerificationDialog(context);
                                         setState((){
                                           if (_formKey.currentState.validate()) {
                                             Navigator.pushNamed(context, '/PwUpdate');
@@ -346,7 +399,8 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                       decoration: BoxDecoration(
                                           color:Colors.blue,
                                           borderRadius: BorderRadius.circular(16)),
-                                      child: TextButton(onPressed: () {
+                                      child: TextButton(onPressed: () async {
+                                        await passwordVerificationDialog(context);
                                         setState((){
                                           if (_formKey.currentState.validate()) {
                                             print(" This works");

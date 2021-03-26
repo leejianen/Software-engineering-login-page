@@ -23,6 +23,35 @@ class _LoginPageState extends State<LoginPage> {
   final loginController = TextEditingController();
 
   final passwordController = TextEditingController();
+  Future<void> emailVerificationDialog(BuildContext context) async {
+    return await showDialog(context: context,
+        builder: (context){
+          return AlertDialog(
+            content: Form(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                      child: Row(
+                        children: [
+                          Text('Please Verify your email',
+                              style: kBodyTextBlack),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+            actions: <Widget>[
+              TextButton(
+                  child: Text('Verify'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }
+              )],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +188,8 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: BoxDecoration(
                                     color:Colors.blue,
                                     borderRadius: BorderRadius.circular(16)),
-                                child: TextButton(onPressed: () {
+                                child: TextButton(onPressed: () async {
+                                  await emailVerificationDialog(context);
                                   setState((){
                                   if (_formKey.currentState.validate()) {
                                     return Navigator.pushNamed(context, '/home');

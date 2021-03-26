@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter LoginPage',
       theme: ThemeData(
+        canvasColor: Colors.transparent,
         textTheme: GoogleFonts.josefinSansTextTheme(Theme.of(context).
         textTheme),
         primarySwatch: Colors.blue,

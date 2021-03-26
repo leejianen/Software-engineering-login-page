@@ -166,7 +166,6 @@ class _PasswordUpdatePageState extends State<PasswordUpdatePage> {
                                       ],
                                     ),
                                   ),
-
                                   //username input
                                   Container(
                                     width: 370,

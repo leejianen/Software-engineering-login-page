@@ -60,7 +60,8 @@ class _NavigationScreenState extends State<NavigationPage> {
                               height: 35.0,
                               child: IconButton(
                                   icon: Icon(NavigationScreen.account_history,),
-                                  onPressed: (){}),
+                                  onPressed: (){
+                                  }),
                             ),
                             Text('Account',
                                 style: navScreen),
@@ -109,7 +110,7 @@ class _NavigationScreenState extends State<NavigationPage> {
                               child: IconButton(
                                   icon: Icon(NavigationScreen.account,),
                                   onPressed: (){
-                                    Navigator.pushNamed(context, '/update');
+                                    _accountDetailsModalBottomSheet(context);
                                   }),
                             ),
                             Text('Account',
@@ -128,6 +129,66 @@ class _NavigationScreenState extends State<NavigationPage> {
         ],
       )
     );
+  }
+  void _accountDetailsModalBottomSheet(context){
+    showModalBottomSheet(context: context, builder: (BuildContext bc) {
+      return Container(
+        height: MediaQuery.of(context).size.height * .70,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          )
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Account History", style: kHeadTextBlack),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 12.0)),
+                  Text("Date of Birth:", style: kBodyTextBlack),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
+                  Text("E-mail:", style: kBodyTextBlack),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
+                  Text("Weight:", style: kBodyTextBlack),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
+                  Text("Password:", style: kBodyTextBlack),
+                  Image(
+                          image: AssetImage('assets/Fitfeet.png'),
+                          fit: BoxFit.cover,
+                        ),
+                ],
+              ),
+              Spacer(),
+              Column(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.cancel, color: Colors.black, size: 30,),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.create, color: Colors.black, size: 40,),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/update');
+                    },
+                  ),
+                  Text("Edit"),
+                  IconButton(
+                    icon: Icon(Icons.logout, color: Colors.black, size: 40,),
+                    onPressed: () {},
+                  ),
+                  Text("Log \nOut"),
+                  ]),
+                    ]),
+              ),
+          );
+    });
   }
 }
 

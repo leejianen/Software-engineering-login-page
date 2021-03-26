@@ -36,3 +36,15 @@ const TextStyle navScreenWhite = TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.white,
 );
+
+const TextStyle kBodyTextBlack = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+);
+
+const TextStyle kHeadTextBlack = TextStyle(
+    fontSize: 40,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+);
