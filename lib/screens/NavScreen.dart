@@ -108,7 +108,9 @@ class _NavigationScreenState extends State<NavigationPage> {
                               height: 35.0,
                               child: IconButton(
                                   icon: Icon(NavigationScreen.account,),
-                                  onPressed: (){}),
+                                  onPressed: (){
+                                    Navigator.pushNamed(context, '/update');
+                                  }),
                             ),
                             Text('Account',
                                 style: navScreen),

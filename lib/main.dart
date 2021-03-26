@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:software_engineering_login/screens/RegisterPage.dart';
 import 'package:software_engineering_login/screens/login%20page.dart';
 import 'package:software_engineering_login/screens/NavScreen.dart';
+import 'package:software_engineering_login/screens/AccountUpdate.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => LoginPage(),
           '/register': (context) => RegisterPage(),
           '/home': (context) => NavigationPage(),
+          '/update': (context) => AccountUpdatePage(),
         }
     );
   }
