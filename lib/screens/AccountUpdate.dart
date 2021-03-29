@@ -53,13 +53,46 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
         actions: <Widget>[
           TextButton(
           child: Text('Submit'),
-          onPressed: () {
+          onPressed: () async {
+            //if password correct
             Navigator.of(context).pop();
+            //else
+            await passwordIncorrectDialog(context);
           }
           )],
       );
     });
   }
+  Future<void> passwordIncorrectDialog(BuildContext context) async {
+    return await showDialog(context: context,
+        builder: (context){
+          return AlertDialog(
+            content: Form(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                      child: Row(
+                        children: [
+                          Text('Password Incorrect',
+                              style: kBodyTextBlack),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+            actions: <Widget>[
+              TextButton(
+                  child: Text('Okay'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }
+              )],
+          );
+        });
+  }
+
 
   var _formKey = GlobalKey<FormState>();
 
@@ -245,30 +278,30 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                           border: Border.all(color: Colors.white, width: 1),
                                           color: Colors.grey[600].withOpacity(0.5),
                                           borderRadius: BorderRadius.circular(16),),
-                                        child: SizedBox(
-                                          child: TextFormField(
-                                            validator: (String value){
-                                              if(value.isEmpty)
-                                                return null;
-                                              else if(checkWeight(value))
-                                                return "   Enter a number \n   between 20 and 200";
-                                              else
-                                                return null;
-                                            },
-                                            controller: weightController,
-                                            decoration: InputDecoration(
-                                              contentPadding:
-                                              const EdgeInsets.symmetric
-                                                (vertical: 10),
-                                              errorStyle: errorText,
-                                              prefixIcon: Padding(
-                                                padding: const EdgeInsets.symmetric(horizontal:20.0),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                                          child: SizedBox(
+                                            child: TextFormField(
+                                              validator: (String value){
+                                                if(value.isEmpty)
+                                                  return null;
+                                                else if(checkWeight(value))
+                                                  return "   Enter a number \n   between 20 and 200";
+                                                else
+                                                  return null;
+                                              },
+                                              controller: weightController,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                const EdgeInsets.symmetric
+                                                  (vertical: 10),
+                                                errorStyle: errorText,
+                                                hintStyle: kBodyText,
                                               ),
-                                              hintStyle: kBodyText,
+                                              style: kBodyText,
+                                              keyboardType: TextInputType.number,
+                                              textInputAction: TextInputAction.next,
                                             ),
-                                            style: kBodyText,
-                                            keyboardType: TextInputType.number,
-                                            textInputAction: TextInputAction.next,
                                           ),
                                         ),
                                       ),
@@ -295,6 +328,16 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                         child: Text("Date Picker", style: TextStyle(color: Colors.white),),
                                       ),
                                     ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Text('Selected Date: ${_date.toString().substring(0,10)}'
+                                            '\n\nIf Date is today date has not been selected',
+                                            style: kBodyText),
+                                      ],
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
@@ -399,11 +442,11 @@ class _AccountUpdatePageState extends State<AccountUpdatePage> {
                                       decoration: BoxDecoration(
                                           color:Colors.blue,
                                           borderRadius: BorderRadius.circular(16)),
-                                      child: TextButton(onPressed: () async {
-                                        await passwordVerificationDialog(context);
+                                      child: TextButton(onPressed: () {
                                         setState((){
                                           if (_formKey.currentState.validate()) {
                                             print(" This works");
+                                            return Navigator.pushNamed(context, '/home');
                                           }
                                           // return Navigator.pushNamed(context, '/home');
                                         });

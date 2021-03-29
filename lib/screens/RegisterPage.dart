@@ -15,6 +15,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
 
   var _formKey = GlobalKey<FormState>();
+  List test = [false, "Fuck you learn to code"];
 
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
@@ -29,6 +30,69 @@ class _RegisterPageState extends State<RegisterPage> {
   ];
 
   DateTime _date = DateTime.now();
+
+  Future<void> registerResultDialog(BuildContext context, [bool pass, String msg]) async {
+    if(pass){
+    return await showDialog(context: context,
+        builder: (context){
+          return AlertDialog(
+            content: Form(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                      child: Row(
+                        children: [
+                          Text('Registration Successful',
+                              style: kBodyTextBlack),
+                        ],
+                      ),
+                    ),
+                    //Password input
+                  ],
+                )),
+            actions: <Widget>[
+              TextButton(
+                  child: Text('Okay'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }
+              )],
+          );
+        });
+  }
+  else{
+      return await showDialog(context: context,
+          builder: (context){
+            return AlertDialog(
+              content: Form(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                        child: Row(
+                          children: [
+                            Text(msg,
+                                style: kBodyTextBlack),
+                          ],
+                        ),
+                      ),
+                      //Password input
+                    ],
+                  )),
+              actions: <Widget>[
+                TextButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }
+                )],
+            );
+          });
+    }
+  }
 
   bool containsUpper(String string) {
     int x = 0;
@@ -255,6 +319,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                     padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
                                     child: Row(
                                       children: [
+                                        Text('Selected Date: ${_date.toString().substring(0,10)}',
+                                            style: kBodyText),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                                    child: Row(
+                                      children: [
                                         Text('Enter Your Username:',
                                             style: kBodyText),
                                       ],
@@ -445,21 +518,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                         decoration: BoxDecoration(
                                             color:Colors.blue,
                                             borderRadius: BorderRadius.circular(16)),
-                                        child: TextButton(onPressed: () {
-                                          setState((){
+                                        child: TextButton(onPressed: () async {
+
+                                          setState(() async {
                                             if (_formKey.currentState.validate()) {
                                               print(" This works");
+                                              await registerResultDialog(context, test[0], test[1]);
                                             }
                                             // return Navigator.pushNamed(context, '/home');
                                           });
-                                          return showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                content: Text("hi"),
-                                              );
-                                            },
-                                          );
+
                                         },
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(vertical: 10.0),

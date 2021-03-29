@@ -52,6 +52,35 @@ class _LoginPageState extends State<LoginPage> {
           );
         });
   }
+  Future<void> passwordIncorrectDialog(BuildContext context) async {
+    return await showDialog(context: context,
+        builder: (context){
+          return AlertDialog(
+            content: Form(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                      child: Row(
+                        children: [
+                          Text('Password Incorrect',
+                              style: kBodyTextBlack),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+            actions: <Widget>[
+              TextButton(
+                  child: Text('Okay'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }
+              )],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,10 +218,14 @@ class _LoginPageState extends State<LoginPage> {
                                     color:Colors.blue,
                                     borderRadius: BorderRadius.circular(16)),
                                 child: TextButton(onPressed: () async {
-                                  await emailVerificationDialog(context);
-                                  setState((){
+                                  setState(() async {
                                   if (_formKey.currentState.validate()) {
+                                    //if password correct
+                                    //if email not verified
+                                    await emailVerificationDialog(context);
                                     return Navigator.pushNamed(context, '/home');
+                                    //if password incorrect
+                                    await passwordIncorrectDialog(context);
                                   }
                                 });
                                 },

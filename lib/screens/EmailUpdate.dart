@@ -10,7 +10,73 @@ class EmailUpdatePage extends StatefulWidget {
 }
 
 class _EmailUpdatePageState extends State<EmailUpdatePage> {
+
+
   var _formKey = GlobalKey<FormState>();
+  List test = [false, "Fuck you learn to code"];
+
+  Future<void> emailResultDialog(BuildContext context, [bool pass, String msg]) async {
+    if(pass){
+      return await showDialog(context: context,
+          builder: (context){
+            return AlertDialog(
+              content: Form(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                        child: Row(
+                          children: [
+                            Text('Email updated',
+                                style: kBodyTextBlack),
+                          ],
+                        ),
+                      ),
+                      //Password input
+                    ],
+                  )),
+              actions: <Widget>[
+                TextButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }
+                )],
+            );
+          });
+    }
+    else{
+      return await showDialog(context: context,
+          builder: (context){
+            return AlertDialog(
+              content: Form(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                        child: Row(
+                          children: [
+                            Text(msg,
+                                style: kBodyTextBlack),
+                          ],
+                        ),
+                      ),
+                      //Password input
+                    ],
+                  )),
+              actions: <Widget>[
+                TextButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }
+                )],
+            );
+          });
+    }
+  }
 
   final emailController = TextEditingController();
   @override
@@ -113,24 +179,17 @@ class _EmailUpdatePageState extends State<EmailUpdatePage> {
                                           color:Colors.blue,
                                           borderRadius: BorderRadius.circular(16)),
                                       child: TextButton(onPressed: () {
-                                        setState((){
+                                        setState(() async {
                                           if (_formKey.currentState.validate()) {
-                                            print(" This works");
+                                            await emailResultDialog(context, test[0], test[1]);
+                                            return Navigator.pushNamed(context, '/home');
                                           }
                                           // return Navigator.pushNamed(context, '/home');
                                         });
-                                        return showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              content: Text("hi"),
-                                            );
-                                          },
-                                        );
                                       },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                          child: Text('Register',
+                                          child: Text('Update',
                                               style: kBodyText),
                                         ),
                                       ),

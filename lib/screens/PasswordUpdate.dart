@@ -14,6 +14,70 @@ class _PasswordUpdatePageState extends State<PasswordUpdatePage> {
 
   final cfmPasswordController = TextEditingController();
   final passwordController = TextEditingController();
+  List test = [false, "Fuck you learn to code"];
+
+  Future<void> passwordResultDialog(BuildContext context, [bool pass, String msg]) async {
+    if(pass){
+      return await showDialog(context: context,
+          builder: (context){
+            return AlertDialog(
+              content: Form(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                        child: Row(
+                          children: [
+                            Text('Password updated',
+                                style: kBodyTextBlack),
+                          ],
+                        ),
+                      ),
+                      //Password input
+                    ],
+                  )),
+              actions: <Widget>[
+                TextButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }
+                )],
+            );
+          });
+    }
+    else{
+      return await showDialog(context: context,
+          builder: (context){
+            return AlertDialog(
+              content: Form(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                        child: Row(
+                          children: [
+                            Text(msg,
+                                style: kBodyTextBlack),
+                          ],
+                        ),
+                      ),
+                      //Password input
+                    ],
+                  )),
+              actions: <Widget>[
+                TextButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }
+                )],
+            );
+          });
+    }
+  }
 
   bool containsUpper(String string) {
     int x = 0;
@@ -214,9 +278,10 @@ class _PasswordUpdatePageState extends State<PasswordUpdatePage> {
                                           color:Colors.blue,
                                           borderRadius: BorderRadius.circular(16)),
                                       child: TextButton(onPressed: () {
-                                        setState((){
+                                        setState(() async {
                                           if (_formKey.currentState.validate()) {
-                                            print(" This works");
+                                            await passwordResultDialog(context, test[0], test[1]);
+                                            return Navigator.pushNamed(context, '/home');
                                           }
                                           // return Navigator.pushNamed(context, '/home');
                                         });
@@ -231,7 +296,7 @@ class _PasswordUpdatePageState extends State<PasswordUpdatePage> {
                                       },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                          child: Text('Register',
+                                          child: Text('Update',
                                               style: kBodyText),
                                         ),
                                       ),

@@ -158,6 +158,7 @@ class _NavigationScreenState extends State<NavigationPage> {
                   Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
                   Text("Password:", style: kBodyTextBlack),
                   Image(
+                          height: 180.0,
                           image: AssetImage('assets/Fitfeet.png'),
                           fit: BoxFit.cover,
                         ),
